@@ -9,6 +9,11 @@ module.exports = (req, res, next) => {
     // database'de olup olmadığı check edilecek.
     //Eğer yoksa request burada kesilerek devam client'a http 400 hatası döndürelecek
     //Eğer varsa req.user bu kullanıcı olarak tamınlanıcak ve next fonksiyonu ile request devam edecek.
+    req.user = {
+        id: req.params.id,
+        first: 'Joe',
+        last: 'Doe'
+    }
     //Eğer kullanıcı admin ise adminlik derecesi req.admin değerine atanacak.
     next();
 }

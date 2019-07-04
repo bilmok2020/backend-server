@@ -1,7 +1,17 @@
 const express = require('express');
-const app = expres();
+const cors = require('cors');
+const morgan = require('morgan');
+const helmet = require('helmet');
+
+const app = express();
 
 //Third Party Middlewares
+app.use(morgan('common'));
+app.use(helmet());
+app.use(cors({
+    origin: ['http://localhost:3000'],
+    methods: ['GET', 'POST'],
+}));
 
 //Middlewares
 app.use(require('./middleware/logger'));
@@ -12,7 +22,7 @@ app.use(require('./router'));
 
 
 
-const port;
+let port = 0;
 if (process.env.NODE_ENV === 'PRODUCTION') {
     port = 3000 || process.env.port;
 } else {
