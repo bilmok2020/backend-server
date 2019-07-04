@@ -1,19 +1,31 @@
-/**
- * TODO: Server'a gelen requestlerde authentication'ı ve autherization'ı
- *  verify etmek için kullanılacak middleware yazılacak
- */
+const jwt = require('jsonwebtoken');
+
+let tokenSecret = process.env.JWT_SECRET || "receptayyiperodan";
 
 module.exports = (req, res, next) => {
-    //Gelen http requestinin headerında bulunan Json WebToken decrypt edilecek.
-    //Decrypt edildikten sonra elde edilen kullanıcı bilgilerinin
-    // database'de olup olmadığı check edilecek.
-    //Eğer yoksa request burada kesilerek devam client'a http 400 hatası döndürelecek
-    //Eğer varsa req.user bu kullanıcı olarak tamınlanıcak ve next fonksiyonu ile request devam edecek.
-    req.user = {
-        id: req.params.id,
-        first: 'Joe',
-        last: 'Doe'
+    //Get jsonwebtoken from header of http request
+    let token = req.headers['x-access-token'] || req.headers['authentication'];
+    //if token exist
+    if (token) {
+        //Verifies token is valid or not
+        jwt.verify(token, tokenSecret, (err, decoded) => {
+            if (err) {
+                return res.status(400).json({
+                    succes: false,
+                    message: 'Token is not valid'
+                });
+
+            } else {
+                //if there is no error set req.user as decoded toke data 
+                req.user = decoded;
+                //Go next middleware or router
+                next();
+            }
+        });
+    } else {
+        return res.status(400).json({
+            succes: false,
+            message: 'Auth token is not supplied'
+        });
     }
-    //Eğer kullanıcı admin ise adminlik derecesi req.admin değerine atanacak.
-    next();
 }
