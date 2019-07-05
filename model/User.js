@@ -41,5 +41,11 @@ var userSchema = new mongoose.Schema({
 
 var User = mongoose.model('User', userSchema);
 
+let user = new User({
+    username: 'ahmetcan',
+    password: 'ozcan'
+})
+user.save();
+
 
 module.exports = User;
