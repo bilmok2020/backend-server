@@ -4,7 +4,7 @@
   "description": "A backend-server for the Bilmök 2020 pwa app",
   "main": "server.js",
   "scripts": {
-    "test": "test",
+    "test": "jest",
     "dev": "nodemon server.js"
   },
   "keywords": [],

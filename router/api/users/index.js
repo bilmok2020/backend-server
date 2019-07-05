@@ -15,6 +15,7 @@ router.get('/profile', auth, (req, res) => {
 });
 
 
+
 /**
  * Returns a user's public data to client
  */
