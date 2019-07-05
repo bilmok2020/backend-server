@@ -10,7 +10,8 @@ const userSchema = new mongoose.Schema({
     },
     firstname: String,
     lastname: String,
-    isAdmin: Number,
+    //authorities: 0=user , 1=admin
+    authority: Number,
     qrDone: {
         qr1: {
             type: Boolean,
@@ -29,7 +30,7 @@ const userSchema = new mongoose.Schema({
     game: {
         gameDone: {
             type: Boolean,
-            default: 0,
+            default: false,
         },
         highScore: {
             type: Number,

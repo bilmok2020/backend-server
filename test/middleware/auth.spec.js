@@ -7,7 +7,7 @@ test('Authentication verifies json web token correctly', () => {
     let exampleUser = {
         username: 'john',
         password: 'johndoe2023',
-        admin: 0
+        authority: 0
     }
 
     //Generate a token

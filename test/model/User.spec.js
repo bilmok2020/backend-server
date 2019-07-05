@@ -4,7 +4,7 @@ test('creates a user', () => {
     let obj = {
         username: 'hal9000',
         password: 'imafraidicantdave',
-        isAdmin: 1,
+        authority: 1,
         qrDone: {
             qr1: true,
             qr2: true,

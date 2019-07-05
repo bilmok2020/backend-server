@@ -9,7 +9,7 @@ let tokenSecret = process.env.JWT_SECRET || "receptayyiperodan";
 function generateJsonWebToken({
     username,
     password,
-    admin
+    authority
 }) {
     //if username or password does not exist return false
     if (!username && !password) {
@@ -17,9 +17,9 @@ function generateJsonWebToken({
     }
     //Generates token
     let token = jwt.sign({
-            username: username,
-            admin: admin || 0
-        },
+        username: username,
+        authority: admin || 0
+    },
         tokenSecret, {
             expiresIn: '72h'
         }
