@@ -1,4 +1,5 @@
 const express = require('express');
+const User = require('../../../model/User');
 const router = express.Router();
 const auth = require('../../../middleware/auth');
 const {
@@ -27,12 +28,23 @@ router.get('/:id', (req, res) => {
 router.post('/login', (req, res) => {
     let user = {
         username: req.body.username,
-        password: req.body.passowrd,
+        password: req.body.password,
     };
-    /**
-     * TODO: check user is valid  or not on database
-     * if it's not valid return 403 error
-     */
+
+    //check if user exist or not
+    User.findOne({ username: username, password: password }, function (err, user)){
+        //if error occurs.
+        if (err) {
+            console.log(err);
+            return res.status(500).send();
+        }
+        //if user does not exist.
+        if (!user) {
+            return res.status(403).send();
+        }
+        //if user exist.
+        return res.status(200).send();
+    }
 
     //generate token using user
     let token = generateJsonWebToken(user);
