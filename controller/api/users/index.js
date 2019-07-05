@@ -1,4 +1,7 @@
 const User = require('../../../model/User');
+const {
+    generateJsonWebToken
+} = require('../../../utils/jwtFunctions');
 
 
 const getUserProfileController = (req, res) => {
@@ -17,8 +20,8 @@ const postLoginController = (req, res) => {
 
     //check if user exist or not
     User.findOne({
-        username: username,
-        password: password
+        username: user.username,
+        password: user.password
     }, function (err, user) {
         //if error occurs.
         if (err) {

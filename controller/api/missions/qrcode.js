@@ -5,16 +5,13 @@ const {
 } = require('../../../utils/verifyMissions');
 
 
-const postQrcodeController = (req, res) => {
+const postQrcodeController = async (req, res) => {
     let scannedQrString = req.body.scannedQrString;
     let index = verifyQrCode(scannedQrString);
-    if (index) {
+    if (index !== false) {
 
-        req.user.save();
-        /**
-         * TODO : Onaylanmış qr kodunu database'e aktarma 
-         * hint : req.user ile hangi kullanıcının datasına ulaşacağımızı elde ediyoruz.
-         */
+        req.user.qrDone[`qr${index + 1}`] = true;
+        await req.user.save();
         res.json({
             success: true,
             message: 'You\'r rock'
