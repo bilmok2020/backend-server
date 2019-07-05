@@ -15,7 +15,7 @@ mongoose.connect('mongodb://localhost:27017/bilmok', {
         console.log("bağlanmışam")
     },
     err => {
-        console.log("Connection failed. Error: ${err}");
+        console.log(`Connection failed. Error: ${err}`);
     }
 );
 
