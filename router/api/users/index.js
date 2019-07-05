@@ -33,8 +33,8 @@ router.post('/login', (req, res) => {
 
     //check if user exist or not
     User.findOne({
-        username: username,
-        password: password
+        username: user.username,
+        password: user.password
     }, function (err, user) {
         //if error occurs.
         if (err) {
