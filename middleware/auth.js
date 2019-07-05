@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const User = require('../model/User')
 
 let tokenSecret = process.env.JWT_SECRET || "receptayyiperodan";
 
@@ -16,8 +17,16 @@ module.exports = (req, res, next) => {
                 });
 
             } else {
-                //if there is no error set req.user as decoded toke data 
-                req.user = decoded;
+                //if there is no error set req.user as decoded toke data
+                User.findOne({ username: decoded.username })
+                    .then((err, result) => {
+                        if (err) {
+                            console.log("User not found!")
+                        }
+                        else {
+                            req.user = result;
+                        }
+                    })
                 //Go next middleware or router
                 next();
             }
