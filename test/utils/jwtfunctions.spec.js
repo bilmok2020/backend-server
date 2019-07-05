@@ -5,7 +5,7 @@ const {
 test('generateJsonWebToken function generates tokens', () => {
     let user = {
         username: 'johndoe',
-        admin: 0
+        authority: 0
     }
     let token = generateJsonWebToken(user);
     expect(token).toBeTruthy();
