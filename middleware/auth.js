@@ -19,16 +19,18 @@ module.exports = (req, res, next) => {
             } else {
                 //if there is no error set req.user as decoded toke data
                 console.log(decoded)
-                User.findOne({ username: decoded.username }, function (err, result) {
+                User.findOne({
+                    username: decoded.username
+                }, function (err, result) {
                     if (err) {
                         console.log("User not found!")
                         res.status(400).json({
                             success: false,
                             message: 'User not found!'
                         })
-                    }
-                    else {
+                    } else {
                         req.user = result;
+                        console.log(req.user);
                         next();
                     }
                 })

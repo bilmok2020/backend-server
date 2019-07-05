@@ -17,9 +17,9 @@ function generateJsonWebToken({
     }
     //Generates token
     let token = jwt.sign({
-        username: username,
-        authority: admin || 0
-    },
+            username: username,
+            authority: authority || 0
+        },
         tokenSecret, {
             expiresIn: '72h'
         }

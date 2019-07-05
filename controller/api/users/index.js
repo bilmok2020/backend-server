@@ -33,17 +33,17 @@ const postLoginController = (req, res) => {
             return res.status(403).send();
         }
         //if user exist.
-        return res.status(200).send();
+        //generate token using user
+        let token = generateJsonWebToken(user);
+        //returns json token for authenticated user
+        res.status(200).json({
+            success: true,
+            message: 'Authentication successfull',
+            token: token,
+        });
     });
 
-    //generate token using user
-    let token = generateJsonWebToken(user);
-    //returns json token for authenticated user
-    res.json({
-        success: true,
-        message: 'Authentication successfull',
-        token: token,
-    });
+
 
 }
 
