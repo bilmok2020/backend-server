@@ -12,7 +12,7 @@ module.exports = (req, res, next) => {
         jwt.verify(token, tokenSecret, (err, decoded) => {
             if (err) {
                 return res.status(400).json({
-                    succes: false,
+                    success: false,
                     message: 'Token is not valid'
                 });
 
@@ -23,8 +23,8 @@ module.exports = (req, res, next) => {
                     if (err) {
                         console.log("User not found!")
                         res.status(400).json({
-                            succes: false,
-                            massage: 'User not found!'
+                            success: false,
+                            message: 'User not found!'
                         })
                     }
                     else {
@@ -37,7 +37,7 @@ module.exports = (req, res, next) => {
         });
     } else {
         return res.status(400).json({
-            succes: false,
+            success: false,
             message: 'Auth token is not supplied'
         });
     }
