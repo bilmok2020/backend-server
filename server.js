@@ -3,11 +3,11 @@ const cors = require('cors');
 const morgan = require('morgan');
 const helmet = require('helmet');
 const bodyParser = require('body-parser');
-
-const app = express();
-//Connect to database
 const mongoose = require('mongoose');
 
+//Generate express instance
+const app = express();
+//Connect to database
 mongoose.connect('mongodb://localhost:27017/bilmok', {
     useNewUrlParser: true
 }).then(
@@ -42,9 +42,9 @@ app.use(require('./router'));
 
 let port = 0;
 if (process.env.NODE_ENV === 'PRODUCTION') {
-    port = 3000 || process.env.port;
+    port = process.env.port || 3000;
 } else {
-    port = 5001 || process.env.port;
+    port = process.env.port || 5001;
 }
 
 //Listens port

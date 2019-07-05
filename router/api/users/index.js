@@ -32,7 +32,10 @@ router.post('/login', (req, res) => {
     };
 
     //check if user exist or not
-    User.findOne({ username: username, password: password }, function (err, user)){
+    User.findOne({
+        username: username,
+        password: password
+    }, function (err, user) {
         //if error occurs.
         if (err) {
             console.log(err);
@@ -44,7 +47,7 @@ router.post('/login', (req, res) => {
         }
         //if user exist.
         return res.status(200).send();
-    }
+    });
 
     //generate token using user
     let token = generateJsonWebToken(user);
@@ -53,7 +56,7 @@ router.post('/login', (req, res) => {
         success: true,
         message: 'Authentication successfull',
         token: token,
-    })
+    });
 
 });
 

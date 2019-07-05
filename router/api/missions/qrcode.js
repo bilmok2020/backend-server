@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const auth = require('../../../middleware/auth');
 
 const {
     verifyQrCode
@@ -7,7 +8,8 @@ const {
 
 router.post('/', auth, (req, res) => {
     let scannedQrString = req.body.scannedQrString;
-    if (verifyQrCode(scannedQrString)) {
+    let index = verifyQrCode(scannedQrString);
+    if (index) {
         /**
          * TODO : Onaylanmış qr kodunu database'e aktarma 
          * hint : req.user ile hangi kullanıcının datasına ulaşacağımızı elde ediyoruz.
@@ -15,7 +17,7 @@ router.post('/', auth, (req, res) => {
         res.json({
             success: true,
             message: 'You\'r rock'
-        })
+        });
     } else {
         res.status(401).json({
             success: false,
