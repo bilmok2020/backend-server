@@ -11,15 +11,30 @@ var userSchema = new mongoose.Schema({
     firstname: String,
     lastname: String,
     isAdmin: Number,
-    qrDone: [{
-        qr1: Number, default: 0,
-        qr2: Number, default: 0,
-        qr3: Number, default: 0
+    qrDone: {
+        qr1: {
+            type: Boolean,
+            default: false
+        },
+        qr2: {
+            type: Boolean,
+            default: false
+        },
+        qr3: {
+            type: Boolean,
+            default: false
+        }
 
-    }],
+    },
     game: {
-        gameDone: Number, default: 0,
-        highScore: Number, default: 0
+        gameDone: {
+            type: Boolean,
+            default: 0,
+        },
+        highScore: {
+            type: Number,
+            default: 0
+        }
     },
 
 })
