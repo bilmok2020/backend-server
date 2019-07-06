@@ -41,6 +41,41 @@ const userSchema = new mongoose.Schema({
 })
 
 
+
+
+
+// User Class
+class UserClass {
+
+    static async  findByUsername(username) {
+        let result = await this.findOne({ username: username });
+        if (result)
+            return result;
+        else
+            return false;
+
+    }
+}
+
+userSchema.loadClass(UserClass);
+//
+
+
+//Schema methods
+userSchema.method('fullName', function () {
+    return this.firstname + " " + this.lastname;
+})
+
+userSchema.method('userHighScore', function () {
+    return this.username + " : " + this.game.highScore;
+})
+
+//
+
+
 const User = mongoose.model('User', userSchema);
 
 module.exports = User;
+
+
+
