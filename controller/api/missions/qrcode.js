@@ -7,7 +7,6 @@ const postQrcodeController = async (req, res) => {
     let scannedQrString = req.body.scannedQrString;
     let index = verifyQrCode(scannedQrString);
     if (index !== false) {
-
         req.user.qrDone[`qr${index + 1}`] = true;
         await req.user.save();
         res.json({

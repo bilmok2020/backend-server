@@ -12,19 +12,23 @@ if (cluster.isMaster) {
     info(`Spawning ${coreCount} workers`);
     for (let index = 0; index < coreCount; index++) {
         workers[index] = cluster.fork();
+
     }
     let numOfWorkers = coreCount;
     let shutdown = () => {
         info('Shutting Down workers..');
-        for (let worker in workers) {
+        for (let index in workers) {
             //Send Workers shutdown signal
+            let worker = workers[index];
             worker.send('shutdown');
-            worker.on('exit', () => {
+            let onExitFunction = () => {
+                console.log(numOfWorkers);
                 if (--numOfWorkers <= 0) {
                     info('All workers shutted down');
                     process.exit();
                 }
-            });
+            };
+            worker.on('exit', onExitFunction);
         }
 
     };
