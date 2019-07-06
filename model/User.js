@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 
+
 const userSchema = new mongoose.Schema({
     username: {
         type: String,
@@ -11,7 +12,11 @@ const userSchema = new mongoose.Schema({
     firstname: String,
     lastname: String,
     //authorities: 0=user , 1=admin
-    authority: Number,
+    authority: {
+        type: Number,
+        default: 0
+    },
+    //User's ban status
     banned: {
         type: Boolean,
         default: false
@@ -43,6 +48,8 @@ const userSchema = new mongoose.Schema({
     },
 
 })
+
+
 
 
 

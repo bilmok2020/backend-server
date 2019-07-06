@@ -8,16 +8,12 @@ const mongoose = require('mongoose');
 //Generate express instance
 const app = express();
 //Connect to database
-mongoose.connect('mongodb://localhost:27017/bilmok', {
-    useNewUrlParser: true
-}).then(
-    () => {
-        console.log("bağlanmışam")
-    },
-    err => {
-        console.log(`Connection failed. Error: ${err}`);
-    }
-);
+var uri = 'mongodb+srv://Tebaks:mongokenan@bilmok-cpeer.mongodb.net/bilmok';
+
+var db = mongoose.connect(uri).catch((error) => { console.log(error); });
+
+
+
 
 //Third Party Middlewares
 app.use(morgan('common'));
