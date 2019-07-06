@@ -4,11 +4,11 @@ var workers = null;
 
 
 //if working process is master process
-if (!cluster.isMaster) {
+if (cluster.isMaster) {
     const info = console.info.bind(undefined, '[master #' + process.pid + ']');
     workers = [];
     const os = require('os');
-    const coreCount = os.cpus();
+    const coreCount = os.cpus().length;
     info(`Spawning ${coreCount} workers`);
     for (let index = 0; index < coreCount; index++) {
         workers[index] = cluster.fork();
