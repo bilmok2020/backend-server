@@ -10,6 +10,7 @@ const postQrcodeController = async (req, res) => {
 
         req.user.qrDone[`qr${index + 1}`] = true;
         await req.user.save();
+        console.log(req.user.starCount());
         res.json({
             success: true,
             message: 'You\'r rock'
