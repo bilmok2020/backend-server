@@ -1,5 +1,3 @@
-const User = require('../../../model/User');
-
 const {
     verifyQrCode
 } = require('../../../utils/verifyMissions');
@@ -22,8 +20,8 @@ const postQrcodeController = async (req, res) => {
             message: 'QrCode is not matched'
         });
     }
-}
+};
 
 module.exports = {
     postQrcodeController
-}
+};
