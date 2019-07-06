@@ -12,6 +12,10 @@ const userSchema = new mongoose.Schema({
     lastname: String,
     //authorities: 0=user , 1=admin
     authority: Number,
+    banned: {
+        type: Boolean,
+        default: false
+    },
     qrDone: {
         qr1: {
             type: Boolean,
