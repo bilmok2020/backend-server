@@ -10,7 +10,7 @@ if (cluster.isMaster) {
     const os = require('os');
     const coreCount = os.cpus().length;
     info(`Spawning ${coreCount} workers`);
-    for (let index = 0; index < coreCount; index++) {
+    for (let index = 0; index < 1; index++) {
         workers[index] = cluster.fork();
 
     }
