@@ -23,7 +23,7 @@ mongoose.connect('mongodb://localhost:27017/bilmok', {
 app.use(morgan('common'));
 app.use(helmet());
 app.use(cors({
-    origin: ['http://localhost:3000', 'http://localhost:5500'],
+    origin: ['http://localhost:3000', 'http://localhost:5500', 'http://localhost:8080'],
     methods: ['GET', 'POST', 'UPDATE'],
 }));
 app.use(bodyParser.urlencoded({
