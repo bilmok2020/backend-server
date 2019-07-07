@@ -4,13 +4,13 @@ var workers = null;
 
 
 //if working process is master process
-if (cluster.isMaster) {
+if (!cluster.isMaster) {
     const info = console.info.bind(undefined, '[master #' + process.pid + ']');
     workers = [];
     const os = require('os');
     const coreCount = os.cpus().length;
     info(`Spawning ${coreCount} workers`);
-    for (let index = 0; index < 1; index++) {
+    for (let index = 0; index < coreCount; index++) {
         workers[index] = cluster.fork();
 
     }
@@ -38,6 +38,8 @@ if (cluster.isMaster) {
 } else {
     const info = console.info.bind(undefined, '[worker #' + process.pid + ']');
     const app = require('./app');
+    console.log(process.env);
+
     let port = 0;
     if (process.env.NODE_ENV === 'PRODUCTION') {
         port = process.env.port || 3000;

@@ -8,9 +8,10 @@ const mongoose = require('mongoose');
 //Generate express instance
 const app = express();
 //Connect to database
-var uri = 'mongodb+srv://Tebaks:mongokenan@bilmok-cpeer.mongodb.net/bilmok';
-
-var db = mongoose.connect(uri).catch((error) => { console.log(error); });
+let uri = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@bilmok-cpeer.mongodb.net/bilmok`;
+var db = mongoose.connect(uri).catch((error) => {
+    console.log(error);
+});
 
 
 
