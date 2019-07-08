@@ -11,6 +11,31 @@ const logSchema = new mongoose.Schema({
     starcount: Number
 })
 
+class LogClass {
+
+    static async logOptions(firstname, lastname, process, starcount) {
+
+        const log = new Log({
+            firstname: firstname,
+            lastname: lastname,
+            process: process,
+            starcount: starcount
+        });
+        try {
+            log.save();
+        } catch (e) {
+            console.log("log couldn't save.")
+        }
+
+        console.log(firstname + " " + lastname + " " + process + " tamamladı!" + "YILDIZ SAYISI: " + starcount);
+
+
+
+    }
+}
+
+logSchema.loadClass(LogClass);
+
 const Log = mongoose.model('Log', logSchema);
 
 module.exports = Log;

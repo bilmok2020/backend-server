@@ -1,4 +1,4 @@
-const logOptions = require('../../../utils/logProcesses')
+const Log = require('../../../model/Log')
 const {
     verifyQrCode
 } = require('../../../utils/verifyMissions');
@@ -7,9 +7,9 @@ const {
 const postQrcodeController = async (req, res) => {
     let scannedQrString = req.body.scannedQrString;
     let index = verifyQrCode(scannedQrString);
-    if (index !== false) {
+    if (index !== false && req.user.qrDone[`qr${index + 1}`] == false) {
         req.user.qrDone[`qr${index + 1}`] = true;
-        logOptions(req.user.firstname, req.user.lastname, "qr" + "" + index + 1, req.user.starCount());
+        Log.logOption(req.user.firstname, req.user.lastname, "qr" + "" + index + 1, req.user.starCount());
         await req.user.save();
         console.log(req.user.starCount());
         res.json({
@@ -19,7 +19,7 @@ const postQrcodeController = async (req, res) => {
     } else {
         res.status(401).json({
             success: false,
-            message: 'QrCode is not matched'
+            message: 'QrCode is not matched or already taken'
         });
     }
 };

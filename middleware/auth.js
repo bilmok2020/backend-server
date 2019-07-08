@@ -21,6 +21,9 @@ module.exports = async (req, res, next) => {
                 console.log(User);
                 try {
                     req.user = await User.findByUsername(decoded.username);
+                    if (req.user.banned) {
+                        return res.status(401);
+                    }
                     console.log(req.user.fullName());
                 } catch (e) {
                     res.status(404).json({
