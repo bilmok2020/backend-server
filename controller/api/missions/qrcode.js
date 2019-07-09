@@ -7,9 +7,14 @@ const {
 const postQrcodeController = async (req, res) => {
     let scannedQrString = req.body.scannedQrString;
     let index = verifyQrCode(scannedQrString);
+    //Check qr index and user take this qr before or not.
     if (index !== false && req.user.qrDone[`qr${index + 1}`] == false) {
         req.user.qrDone[`qr${index + 1}`] = true;
-        Log.logOption(req.user.firstname, req.user.lastname, "qr" + "" + index + 1, req.user.starCount());
+        try {
+            Log.logOptions(req.user.firstname, req.user.lastname, "qr" + "" + (index + 1), req.user.starCount());
+        } catch (e) {
+            console.log(e)
+        }
         await req.user.save();
         console.log(req.user.starCount());
         res.json({

@@ -9,5 +9,5 @@
         "node_modules": true
     },
     "jshint.config": ".jshintrc",
-    "jshint.enable": true
+    "jshint.enable": true,
 }

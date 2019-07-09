@@ -41,6 +41,10 @@ const userSchema = new mongoose.Schema({
             type: Boolean,
             default: false,
         },
+        easteregg: {
+            type: Boolean,
+            default: false,
+        },
         highScore: {
             type: Number,
             default: 0
@@ -88,6 +92,8 @@ userSchema.method('starCount', function () {
     var starcount = 0;
     //check if game complated.
     if (this.game.gameDone)
+        starcount += 1;
+    if (this.game.easteregg)
         starcount += 1;
     //checking for every qrcode.
     for (var qrNumber = 0; qrNumber < qrcount; qrNumber++) {

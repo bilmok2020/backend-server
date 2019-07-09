@@ -12,7 +12,7 @@ const logSchema = new mongoose.Schema({
 })
 
 class LogClass {
-
+    //Log options and printing log.
     static async logOptions(firstname, lastname, process, starcount) {
 
         const log = new Log({
@@ -27,7 +27,7 @@ class LogClass {
             console.log("log couldn't save.")
         }
 
-        console.log(firstname + " " + lastname + " " + process + " tamamladı!" + "YILDIZ SAYISI: " + starcount);
+        console.log(firstname + " " + lastname + " " + process + " tamamladı!" + " YILDIZ SAYISI: " + starcount);
 
 
 

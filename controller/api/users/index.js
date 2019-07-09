@@ -17,13 +17,13 @@ const postLoginController = (req, res) => {
         username: req.body.username,
         password: req.body.password,
     };
-    console.log('geliyyyy', req.body);
+    console.log('reached', req.body);
     //check if user exist or not
     User.findOne({
         username: user.username,
         password: user.password
     }, function (err, user) {
-        console.log('ula user burdadir', user);
+        console.log('USER', user);
         //if error occurs.
         if (err) {
             console.log(err);
@@ -40,10 +40,10 @@ const postLoginController = (req, res) => {
         //generate token using user
         let token = generateJsonWebToken(user);
         //returns json token for authenticated user
-        console.log('yolledım gitti key\'i ', token);
+        console.log('Key sent', token);
         res.status(200).json({
             success: true,
-            message: 'Authentication successfull',
+            message: 'Authentication successful',
             token: token,
         });
     });
