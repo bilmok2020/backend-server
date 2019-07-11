@@ -1,4 +1,6 @@
 const cluster = require('cluster');
+
+
 var server = null;
 var workers = null;
 
@@ -51,6 +53,7 @@ if (!cluster.isMaster) {
     server = app.listen(port, () => {
         console.log(`Listening port ${port}`);
     });
+    require('./chat/server');
 
     process.on('message', msg => {
         switch (msg) {
