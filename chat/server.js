@@ -12,15 +12,11 @@ io.on('connection', (socket) => {
     socket.on('chat message', function (msg) {
 
         // configuring chat array here
-        const chat = {
-            user: 'Anonymouse',
-            message: msg
-        }
         if (chats.length < 5) {
-            chats.push(chat);
+            chats.push(msg);
         } else {
             chats.shift();
-            chats.push(chat);
+            chats.push(msg);
         }
         console.log(chats);
         // broadcasting here
