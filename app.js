@@ -13,9 +13,6 @@ var db = mongoose.connect(uri).catch((error) => {
     console.log(error);
 });
 
-
-
-
 //Third Party Middlewares
 app.use(morgan('common'));
 app.use(helmet());
@@ -34,7 +31,5 @@ app.use(require('./middleware/logger'));
 
 //Routers
 app.use(require('./router'));
-
-
 
 module.exports = app;
