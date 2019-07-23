@@ -6,6 +6,7 @@
   "scripts": {
     "test": "jest",
     "dev": "glevn index.js --glevmon",
+    "start": "node index.js",
     "lint": "eslint"
   },
   "keywords": [],

@@ -10,4 +10,7 @@
     },
     "jshint.config": ".jshintrc",
     "jshint.enable": true,
+    "jshint.options": {
+        "esversion": 6
+    }
 }
