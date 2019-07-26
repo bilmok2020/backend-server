@@ -11,12 +11,13 @@ const postQrcodeController = async (req, res) => {
     if (index !== false && req.user.qrDone[`qr${index + 1}`] == false) {
         req.user.qrDone[`qr${index + 1}`] = true;
         try {
-            Log.logOptions(req.user.firstname, req.user.lastname, "qr" + "" + (index + 1), req.user.starCount());
+            Log.logOptions(req.user.firstname, req.user.lastname, "qr" + "" + (index + 1), req.user.userStarCount());
+            req.user.starCount = req.user.userStarCount();
         } catch (e) {
             console.log(e)
         }
         await req.user.save();
-        console.log(req.user.starCount());
+        console.log(req.user.userStarCount());
         res.json({
             success: true,
             message: 'You\'r rock'

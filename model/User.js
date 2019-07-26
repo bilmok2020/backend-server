@@ -41,7 +41,7 @@ const userSchema = new mongoose.Schema({
             type: Boolean,
             default: false,
         },
-        easteregg: {
+        easterEgg: {
             type: Boolean,
             default: false,
         },
@@ -50,6 +50,10 @@ const userSchema = new mongoose.Schema({
             default: 0
         }
     },
+    starCount: {
+        type: Number,
+        default: 0
+    }
 
 })
 
@@ -62,8 +66,10 @@ const userSchema = new mongoose.Schema({
 // User Class
 class UserClass {
 
-    static async  findByUsername(username) {
-        let result = await this.findOne({ username: username });
+    static async findByUsername(username) {
+        let result = await this.findOne({
+            username: username
+        });
         if (result)
             return result;
         else
@@ -87,7 +93,7 @@ userSchema.method('userHighScore', function () {
 })
 
 //User's star count.
-userSchema.method('starCount', function () {
+userSchema.method('userStarCount', function () {
     var qrcount = 3;
     var starcount = 0;
     //check if game complated.
@@ -109,6 +115,3 @@ userSchema.method('starCount', function () {
 const User = mongoose.model('User', userSchema);
 
 module.exports = User;
-
-
-
